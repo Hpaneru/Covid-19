@@ -20,7 +20,6 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     asyncInit();
     global();
-    setState(() {});
   }
 
   asyncInit() async {
@@ -231,124 +230,135 @@ class _HomeScreenState extends State<HomeScreen> {
                         style: TextStyle(
                             fontSize: 20, fontWeight: FontWeight.bold)),
                   ),
-                  Row(
-                    children: <Widget>[
-                      Expanded(
-                        child: Container(
-                          // color: ,
-                          padding: EdgeInsets.all(20),
-                          child: Column(children: <Widget>[
-                            Text(
-                              globaldata[index]['total_cases'],
-                              // globaldata[index]["total_cases"],
+                  globaldata == null
+                      ? CircularProgressIndicator()
+                      : Row(
+                          children: <Widget>[
+                            Expanded(
+                              child: Container(
+                                // color: ,
+                                padding: EdgeInsets.all(20),
+                                child: Column(children: <Widget>[
+                                  Text(
+                                    globaldata[index]['total_cases'],
+                                  ),
+                                  Padding(
+                                      padding: EdgeInsets.fromLTRB(0, 0, 0, 5)),
+                                  Text(
+                                    "Total Cases",
+                                    style: TextStyle(color: Colors.white),
+                                  )
+                                ]),
+                              ),
                             ),
-                            Padding(padding: EdgeInsets.fromLTRB(0, 0, 0, 5)),
-                            Text(
-                              "Total Cases",
-                              style: TextStyle(color: Colors.white),
-                            )
-                          ]),
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(5),
-                      ),
-                      Expanded(
-                        child: Container(
-                          color: Colors.red,
-                          padding: EdgeInsets.all(20),
-                          child: Column(children: <Widget>[
-                            Text(
-                              globaldata[index]["total_deaths"].toString(),
+                            Padding(
+                              padding: EdgeInsets.all(5),
                             ),
-                            Padding(padding: EdgeInsets.fromLTRB(0, 0, 0, 5)),
-                            Text(
-                              "Total Deaths",
-                              style: TextStyle(color: Colors.white),
-                            )
-                          ]),
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(5),
-                      ),
-                      Expanded(
-                        child: Container(
-                          // color: ,
-                          padding: EdgeInsets.all(20),
-                          child: Column(children: <Widget>[
-                            Text(
-                              globaldata[index]["total_recovered"].toString(),
+                            Expanded(
+                              child: Container(
+                                color: Colors.red,
+                                padding: EdgeInsets.all(20),
+                                child: Column(children: <Widget>[
+                                  Text(
+                                    globaldata[index]["total_deaths"]
+                                        .toString(),
+                                  ),
+                                  Padding(
+                                      padding: EdgeInsets.fromLTRB(0, 0, 0, 5)),
+                                  Text(
+                                    "Total Deaths",
+                                    style: TextStyle(color: Colors.white),
+                                  )
+                                ]),
+                              ),
                             ),
-                            Padding(padding: EdgeInsets.fromLTRB(0, 0, 0, 5)),
-                            Text(
-                              "Total Recovered",
-                              style: TextStyle(color: Colors.white),
-                            )
-                          ]),
-                        ),
-                      )
-                    ],
-                  ),
-                  Row(
-                    children: <Widget>[
-                      Expanded(
-                        child: Container(
-                          // color: ,
-                          padding: EdgeInsets.all(20),
-                          child: Column(children: <Widget>[
-                            Text(
-                              globaldata[index]["new_cases"],
+                            Padding(
+                              padding: EdgeInsets.all(5),
                             ),
-                            Padding(padding: EdgeInsets.fromLTRB(0, 0, 0, 5)),
-                            Text(
-                              "New Cases",
-                              style: TextStyle(color: Colors.white),
+                            Expanded(
+                              child: Container(
+                                // color: ,
+                                padding: EdgeInsets.all(20),
+                                child: Column(children: <Widget>[
+                                  Text(
+                                    globaldata[index]["total_recovered"]
+                                        .toString(),
+                                  ),
+                                  Padding(
+                                      padding: EdgeInsets.fromLTRB(0, 0, 0, 5)),
+                                  Text(
+                                    "Total Recovered",
+                                    style: TextStyle(color: Colors.white),
+                                  )
+                                ]),
+                              ),
                             )
-                          ]),
+                          ],
                         ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(5),
-                      ),
-                      Expanded(
-                        child: Container(
-                          color: Colors.red,
-                          padding: EdgeInsets.all(20),
-                          child: Column(children: <Widget>[
-                            Text(
-                              globaldata[index]["new_deaths"].toString(),
+                  globaldata == null
+                      ? SizedBox()
+                      : Row(
+                          children: <Widget>[
+                            Expanded(
+                              child: Container(
+                                // color: ,
+                                padding: EdgeInsets.all(20),
+                                child: Column(children: <Widget>[
+                                  Text(
+                                    globaldata[index]["new_cases"],
+                                  ),
+                                  Padding(
+                                      padding: EdgeInsets.fromLTRB(0, 0, 0, 5)),
+                                  Text(
+                                    "New Cases",
+                                    style: TextStyle(color: Colors.white),
+                                  )
+                                ]),
+                              ),
                             ),
-                            Padding(padding: EdgeInsets.fromLTRB(0, 0, 0, 5)),
-                            Text(
-                              "New Deaths",
-                              style: TextStyle(color: Colors.white),
+                            Padding(
+                              padding: EdgeInsets.all(5),
+                            ),
+                            Expanded(
+                              child: Container(
+                                color: Colors.red,
+                                padding: EdgeInsets.all(20),
+                                child: Column(children: <Widget>[
+                                  Text(
+                                    globaldata[index]["new_deaths"].toString(),
+                                  ),
+                                  Padding(
+                                      padding: EdgeInsets.fromLTRB(0, 0, 0, 5)),
+                                  Text(
+                                    "New Deaths",
+                                    style: TextStyle(color: Colors.white),
+                                  )
+                                ]),
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.all(5),
+                            ),
+                            Expanded(
+                              child: Container(
+                                // color: ,
+                                padding: EdgeInsets.all(20),
+                                child: Column(children: <Widget>[
+                                  Text(
+                                      // globaldata[index]["total_recovered"].toString(),
+                                      " "),
+                                  Padding(
+                                      padding: EdgeInsets.fromLTRB(0, 0, 0, 5)),
+                                  Text(
+                                    // "Total Recovered",
+                                    " ",
+                                    style: TextStyle(color: Colors.white),
+                                  )
+                                ]),
+                              ),
                             )
-                          ]),
+                          ],
                         ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(5),
-                      ),
-                      Expanded(
-                        child: Container(
-                          // color: ,
-                          padding: EdgeInsets.all(20),
-                          child: Column(children: <Widget>[
-                            Text(
-                                // globaldata[index]["total_recovered"].toString(),
-                                " "),
-                            Padding(padding: EdgeInsets.fromLTRB(0, 0, 0, 5)),
-                            Text(
-                              // "Total Recovered",
-                              " ",
-                              style: TextStyle(color: Colors.white),
-                            )
-                          ]),
-                        ),
-                      )
-                    ],
-                  ),
                   SizedBox(height: 15.0),
                   RichText(
                     text: TextSpan(
