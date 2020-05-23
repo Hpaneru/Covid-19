@@ -1,4 +1,5 @@
-import 'package:covid19/screens/home_screen.dart';
+import 'package:covid19/screens/home.dart';
+// import 'package:covid19/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -11,8 +12,8 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     Future.delayed(
         Duration(seconds: 1),
-        () => Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (context) => HomeScreen())));
+        () => Navigator.of(context)
+            .pushReplacement(MaterialPageRoute(builder: (context) => Home())));
   }
 
   @override

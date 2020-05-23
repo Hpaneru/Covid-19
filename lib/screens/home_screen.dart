@@ -1,9 +1,13 @@
+// import 'package:covid19/helpers/api.dart';
+// import 'package:covid19/screens/allcountry_screen.dart';
+import 'package:covid19/helpers/api.dart';
 import 'package:covid19/screens/allcountry_screen.dart';
 import 'package:covid19/screens/info_screen.dart';
 import 'package:flutter/gestures.dart';
+// import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+// import 'dart:convert';
+// import 'package:http/http.dart' as http;
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -11,8 +15,9 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List data;
-  List globaldata;
+  List data = [];
+  List globaldata = [];
+  int index;
 
   bool loading = true;
   @override
@@ -23,34 +28,26 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   asyncInit() async {
-    http.Response response = await http.get(
-        Uri.encodeFull("https://nepalcorona.info/api/v1/data/nepal"),
-        headers: {"Accept": "application/json"});
-    print(response.body);
-    var getdata = json.decode(response.body);
+    var getdata = await ApiHelper().nepalSummary();
     setState(() {
       loading = false;
-      data = [getdata];
+      this.data = getdata;
     });
   }
 
   global() async {
-    http.Response response = await http.get(
-        Uri.encodeFull("https://brp.com.np/covid/alldata.php"),
-        headers: {"Accept": "application/json"});
-    print(response.body);
-    var getglobaldata = json.decode(response.body);
+    var getglobaldata = await ApiHelper().globalSummary();
     setState(() {
       loading = false;
-      globaldata = [getglobaldata];
+      this.globaldata = getglobaldata;
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.grey[900],
         appBar: AppBar(
+          // backgroundColor: Colors.grey[900],
           title: Text("COVID-19"),
           actions: <Widget>[
             IconButton(
@@ -67,7 +64,7 @@ class _HomeScreenState extends State<HomeScreen> {
               },
             )
           ],
-          backgroundColor: Colors.grey[900],
+          // backgroundColor: Colors.grey[900],
         ),
         body: Column(
           children: <Widget>[
@@ -90,7 +87,7 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Card(
             color: Colors.grey[600].withOpacity(0.5),
             child: SizedBox(
-              height: 540,
+              height: 545,
               child: Column(
                 children: <Widget>[
                   Center(
@@ -236,7 +233,6 @@ class _HomeScreenState extends State<HomeScreen> {
                           children: <Widget>[
                             Expanded(
                               child: Container(
-                                // color: ,
                                 padding: EdgeInsets.all(20),
                                 child: Column(children: <Widget>[
                                   Text(
@@ -344,16 +340,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 // color: ,
                                 padding: EdgeInsets.all(20),
                                 child: Column(children: <Widget>[
-                                  Text(
-                                      // globaldata[index]["total_recovered"].toString(),
-                                      " "),
-                                  Padding(
-                                      padding: EdgeInsets.fromLTRB(0, 0, 0, 5)),
-                                  Text(
-                                    // "Total Recovered",
-                                    " ",
-                                    style: TextStyle(color: Colors.white),
-                                  )
+                                  Text(""),
                                 ]),
                               ),
                             )

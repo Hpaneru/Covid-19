@@ -19,19 +19,21 @@ class _AllCountryScreenState extends State<AllCountryScreen> {
 
   asyncInit() async {
     var data = await ApiHelper().allCountry();
-    print(data.runtimeType);
     setState(() {
       loading = false;
       this.data = this.filteredCountries = data;
     });
   }
-  void _filterCountries(value){
-    
+
+  void _filterCountries(value) {
     setState(() {
-      
-    filteredCountries = data.where((data) => data['Country'].toLowerCase().contains(value.toLowerCase())).toList();
+      filteredCountries = data
+          .where((data) =>
+              data['Country'].toLowerCase().contains(value.toLowerCase()))
+          .toList();
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,39 +42,43 @@ class _AllCountryScreenState extends State<AllCountryScreen> {
           title: !isSearching
               ? Text("WORLD SUMMARY")
               : TextField(
-                onChanged: (value){
-                  _filterCountries(value);
-                },
-                style: TextStyle(color: Colors.white),
+                  onChanged: (value) {
+                    _filterCountries(value);
+                  },
+                  style: TextStyle(color: Colors.white),
                   decoration: InputDecoration(
-                      hintText: "Search Here", icon: Icon(Icons.search, color: Colors.white,),
-                      hintStyle: TextStyle(color:Colors.white)),
+                      hintText: "Search Here",
+                      icon: Icon(
+                        Icons.search,
+                        color: Colors.white,
+                      ),
+                      hintStyle: TextStyle(color: Colors.white)),
                 ),
           actions: <Widget>[
-            isSearching ? 
-              IconButton(
-              icon: Icon(
-                Icons.cancel,
-                color: Colors.white,
-              ),
-              onPressed: () {
-                setState(() {
-                  this.isSearching = false;
-                  filteredCountries = data;
-                });
-              },
-            ):
-            IconButton(
-              icon: Icon(
-                Icons.search,
-                color: Colors.white,
-              ),
-              onPressed: () {
-                setState(() {
-                  this.isSearching = true;
-                });
-              },
-            )
+            isSearching
+                ? IconButton(
+                    icon: Icon(
+                      Icons.cancel,
+                      color: Colors.white,
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        this.isSearching = false;
+                        filteredCountries = data;
+                      });
+                    },
+                  )
+                : IconButton(
+                    icon: Icon(
+                      Icons.search,
+                      color: Colors.white,
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        this.isSearching = true;
+                      });
+                    },
+                  )
           ],
           backgroundColor: Colors.grey[900],
         ),
@@ -111,7 +117,8 @@ class _AllCountryScreenState extends State<AllCountryScreen> {
                           padding: EdgeInsets.all(20),
                           child: Column(children: <Widget>[
                             Text(
-                              filteredCountries[index]["TotalConfirmed"].toString(),
+                              filteredCountries[index]["TotalConfirmed"]
+                                  .toString(),
                             ),
                             Padding(padding: EdgeInsets.fromLTRB(0, 0, 0, 5)),
                             Text(
@@ -130,7 +137,8 @@ class _AllCountryScreenState extends State<AllCountryScreen> {
                           padding: EdgeInsets.all(20),
                           child: Column(children: <Widget>[
                             Text(
-                              filteredCountries[index]["TotalDeaths"].toString(),
+                              filteredCountries[index]["TotalDeaths"]
+                                  .toString(),
                             ),
                             Padding(padding: EdgeInsets.fromLTRB(0, 0, 0, 5)),
                             Text(
@@ -149,7 +157,8 @@ class _AllCountryScreenState extends State<AllCountryScreen> {
                           padding: EdgeInsets.all(20),
                           child: Column(children: <Widget>[
                             Text(
-                              filteredCountries[index]["TotalRecovered"].toString(),
+                              filteredCountries[index]["TotalRecovered"]
+                                  .toString(),
                             ),
                             Padding(padding: EdgeInsets.fromLTRB(0, 0, 0, 5)),
                             Text(
@@ -171,7 +180,8 @@ class _AllCountryScreenState extends State<AllCountryScreen> {
                           padding: EdgeInsets.all(20),
                           child: Column(children: <Widget>[
                             Text(
-                              filteredCountries[index]["NewConfirmed"].toString(),
+                              filteredCountries[index]["NewConfirmed"]
+                                  .toString(),
                             ),
                             Padding(padding: EdgeInsets.fromLTRB(0, 0, 0, 5)),
                             Text(
@@ -209,7 +219,8 @@ class _AllCountryScreenState extends State<AllCountryScreen> {
                           padding: EdgeInsets.all(20),
                           child: Column(children: <Widget>[
                             Text(
-                              filteredCountries[index]["NewRecovered"].toString(),
+                              filteredCountries[index]["NewRecovered"]
+                                  .toString(),
                             ),
                             Padding(padding: EdgeInsets.fromLTRB(0, 0, 0, 5)),
                             Text(

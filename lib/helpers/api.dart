@@ -6,7 +6,6 @@ class ApiHelper {
     http.Response response = await http.get(
         Uri.encodeFull("https://api.covid19api.com/summary"),
         headers: {"Accept": "application/json"});
-    print(response.body);
     return json.decode(response.body)["Countries"];
   }
 
@@ -14,8 +13,15 @@ class ApiHelper {
     http.Response response = await http.get(
         Uri.encodeFull("https://nepalcorona.info/api/v1/data/nepal"),
         headers: {"Accept": "application/json"});
-    print(response.body);
-    return json.decode(response.body);
+    var nepaldata = json.decode(response.body);
+    return [nepaldata];
+  }
+
+  Future<List> globalSummary() async {
+    http.Response response = await http.get(
+        Uri.encodeFull("https://brp.com.np/covid/alldata.php"),
+        headers: {"Accept": "application/json"});
+    var globaldata = json.decode(response.body);
+    return [globaldata];
   }
 }
-
