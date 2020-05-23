@@ -24,7 +24,6 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     asyncInit();
-    global();
   }
 
   asyncInit() async {
@@ -33,9 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
       loading = false;
       this.data = getdata;
     });
-  }
 
-  global() async {
     var getglobaldata = await ApiHelper().globalSummary();
     setState(() {
       loading = false;
@@ -47,7 +44,6 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          // backgroundColor: Colors.grey[900],
           title: Text("COVID-19"),
           actions: <Widget>[
             IconButton(
@@ -64,7 +60,6 @@ class _HomeScreenState extends State<HomeScreen> {
               },
             )
           ],
-          // backgroundColor: Colors.grey[900],
         ),
         body: Column(
           children: <Widget>[
@@ -79,8 +74,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   ListView buildListView() {
     return ListView.builder(
-      shrinkWrap: true,
-      itemCount: data == null ? 0 : data.length,
+      itemCount: globaldata == null ? 0 : globaldata.length,
       itemBuilder: (BuildContext context, int index) {
         return Padding(
           padding: const EdgeInsets.all(2.0),
@@ -236,7 +230,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 padding: EdgeInsets.all(20),
                                 child: Column(children: <Widget>[
                                   Text(
-                                    globaldata[index]['total_cases'],
+                                    globaldata[index]['total_cases'].toString(),
                                   ),
                                   Padding(
                                       padding: EdgeInsets.fromLTRB(0, 0, 0, 5)),
@@ -301,7 +295,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 padding: EdgeInsets.all(20),
                                 child: Column(children: <Widget>[
                                   Text(
-                                    globaldata[index]["new_cases"],
+                                    globaldata[index]["new_cases"].toString(),
                                   ),
                                   Padding(
                                       padding: EdgeInsets.fromLTRB(0, 0, 0, 5)),

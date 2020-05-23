@@ -1,6 +1,8 @@
-import 'package:covid19/screens/home.dart';
-// import 'package:covid19/screens/home_screen.dart';
+import 'dart:async';
+import 'package:connectivity/connectivity.dart';
+import 'package:covid19/screens/home_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -8,12 +10,49 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  var connectivity;
+  StreamSubscription<ConnectivityResult> subscription;
+
+  @override
   void initState() {
     super.initState();
-    Future.delayed(
-        Duration(seconds: 1),
-        () => Navigator.of(context)
-            .pushReplacement(MaterialPageRoute(builder: (context) => Home())));
+    connectivity = Connectivity();
+    subscription =
+        connectivity.onConnectivityChanged.listen((ConnectivityResult result) {
+      if (result == ConnectivityResult.wifi ||
+          result == ConnectivityResult.mobile) {
+        Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (context) => HomeScreen()));
+      } else {
+        _showDialog('No Internet Access', 'You\'re Not Connected Over Network');
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    subscription.cancel();
+    super.dispose();
+  }
+
+  _showDialog(title, text) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text(title),
+          content: Text(text),
+          actions: <Widget>[
+            FlatButton(
+              child: Text('Exit'),
+              onPressed: () {
+                SystemNavigator.pop();
+              },
+            )
+          ],
+        );
+      },
+    );
   }
 
   @override

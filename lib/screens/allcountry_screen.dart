@@ -96,7 +96,7 @@ class _AllCountryScreenState extends State<AllCountryScreen> {
   ListView buildListView() {
     return ListView.builder(
         shrinkWrap: true,
-        itemCount: data == null ? 0 : data.length,
+        itemCount: data == null ? 0 : data?.length ?? "",
         itemBuilder: (BuildContext context, int index) {
           return Padding(
             padding: const EdgeInsets.all(2.0),
